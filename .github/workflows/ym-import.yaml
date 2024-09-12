@@ -61,10 +61,10 @@ jobs:
           ym_version: ${{ inputs.ym_version }}
           GITHUB_REPOSITORY: ${{ inputs.GITHUB_REPOSITORY }}
           DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
-          DOMINO_CLIENT_ID: ${{ vars.DOMINO_CLIENT_ID }}
-          DOMINO_USERNAME: ${{ vars.DOMINO_USERNAME }}
-          AUTH0_CLIENT_ID: ${{ vars.AUTH0_CLIENT_ID }}
-          DOMINO_PASSWORD: ${{ secrets.DOMINO_PASSWORD }}
-          DOMINO_CLIENT_SECRET: ${{ secrets.DOMINO_CLIENT_SECRET }}
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          DOMINO_CLIENT_ID: ${{ vars.DOMINO_CLIENT_ID }}
+          DOMINO_CLIENT_SECRET: ${{ secrets.DOMINO_CLIENT_SECRET }}
+          DOMINO_USERNAME: ${{ vars.DOMINO_USERNAME }}
+          DOMINO_PASSWORD: ${{ secrets.DOMINO_PASSWORD }}
+          AUTH0_CLIENT_ID: ${{ vars.AUTH0_CLIENT_ID }}
           AUTH0_CLIENT_SECRET: ${{ secrets.AUTH0_CLIENT_SECRET }}
