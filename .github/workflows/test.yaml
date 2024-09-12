@@ -1,0 +1,70 @@
+name: test
+on:
+  workflow_dispatch:
+    inputs:
+      method:
+        description: method to perform
+        required: true
+        default: post
+        type: choice
+        options:
+        - post
+        - put
+        - delete
+        - patch
+      environment:
+        description: Environment
+        type: choice
+        options:
+        - dev
+        - devx
+        - test
+        - stage
+        - prod
+        required: true
+      resources:
+        description: Directory of resources
+        type: string
+        default: test/src/test/resources
+      verbose:
+        description: Be verbose
+        type: boolean
+        default: true
+      force:
+        description: Ignore failures
+        type: boolean
+        default: true
+      ym_version:
+        description: Version of ym-cli
+        type: string
+        default: latest
+      GITHUB_REPOSITORY:
+          description: Account
+          type: string
+          default: Youmoni/ymdemo
+jobs:
+  test:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+            path: test
+      - name: run ym-import/action.yaml
+        uses: ./test
+        with:
+          method: ${{ inputs.method }}
+          environment: ${{ inputs.environment }}
+          resources: ${{ inputs.resources }}
+          verbose: ${{ inputs.verbose }}
+          force: ${{ inputs.force }}
+          ym_version: ${{ inputs.ym_version }}
+          GITHUB_REPOSITORY: ${{ inputs.GITHUB_REPOSITORY }}
+          DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
+          DOMINO_CLIENT_ID: ${{ vars.DOMINO_CLIENT_ID }}
+          DOMINO_USERNAME: ${{ vars.DOMINO_USERNAME }}
+          AUTH0_CLIENT_ID: ${{ vars.AUTH0_CLIENT_ID }}
+          DOMINO_PASSWORD: ${{ secrets.DOMINO_PASSWORD }}
+          DOMINO_CLIENT_SECRET: ${{ secrets.DOMINO_CLIENT_SECRET }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          AUTH0_CLIENT_SECRET: ${{ secrets.AUTH0_CLIENT_SECRET }}
