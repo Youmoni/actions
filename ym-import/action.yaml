@@ -59,6 +59,7 @@ runs:
           password: ${{ inputs.DOCKERHUB_TOKEN }}
 
       - name: debug
+        shell: bash
         run: |
           echo "ls GITHUB_WORKSPACE: $(ls $GITHUB_WORKSPACE)"
           echo "RESOURCES=$GITHUB_WORKSPACE/${{ inputs.resources }}" >> $GITHUB_ENV
