@@ -76,7 +76,7 @@ runs:
             echo "VERBOSE=" >> $GITHUB_ENV
           fi
           echo "RESOURCES=$GITHUB_WORKSPACE/${{ inputs.resources }}" >> $GITHUB_ENV
-          echo "resources: $(ls -R $GITHUB_WORKSPACE/${{ inputs.resources }}")
+          echo "resources: $(ls -R $GITHUB_WORKSPACE/${{ inputs.resources }})"
 
       - name: ym import
         shell: bash
