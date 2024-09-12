@@ -26,22 +26,22 @@ inputs:
       DOCKERHUB_USERNAME:
         required: true
         type: string
+      DOCKERHUB_TOKEN:
+        required: true
+        type: string
       DOMINO_CLIENT_ID:
-        required: true
-        type: string
-      DOMINO_USERNAME:
-        required: true
-        type: string
-      AUTH0_CLIENT_ID:
-        required: true
-        type: string
-      DOMINO_PASSWORD:
         required: true
         type: string
       DOMINO_CLIENT_SECRET:
         required: true
         type: string
-      DOCKERHUB_TOKEN:
+      DOMINO_USERNAME:
+        required: true
+        type: string
+      DOMINO_PASSWORD:
+        required: true
+        type: string
+      AUTH0_CLIENT_ID:
         required: true
         type: string
       AUTH0_CLIENT_SECRET:
