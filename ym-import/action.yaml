@@ -1,0 +1,96 @@
+name: 'ym import resources'
+description: 'Imports resources'
+author: 'Youmoni'
+inputs:
+      method:
+        required: true
+        type: string
+      environment:
+        required: true
+        type: string
+      resources:
+        required: true
+        type: string
+      force:
+        required: true
+        type: boolean
+      verbose:
+        required: true
+        type: boolean
+      ym_version:
+        required: true
+        type: string
+      GITHUB_REPOSITORY:
+        required: true
+        type: string
+      DOCKERHUB_USERNAME:
+        required: true
+        type: string
+      DOMINO_CLIENT_ID:
+        required: true
+        type: string
+      DOMINO_USERNAME:
+        required: true
+        type: string
+      AUTH0_CLIENT_ID:
+        required: true
+        type: string
+      DOMINO_PASSWORD:
+        required: true
+        type: string
+      DOMINO_CLIENT_SECRET:
+        required: true
+        type: string
+      DOCKERHUB_TOKEN:
+        required: true
+        type: string
+      AUTH0_CLIENT_SECRET:
+        required: true
+        type: string
+
+runs:
+  using: composite
+  steps:
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ inputs.DOCKERHUB_USERNAME }}
+          password: ${{ inputs.DOCKERHUB_TOKEN }}
+
+      - name: Prepare arguments
+        id: prepare
+        shell: bash
+        run: |
+          full_repo_name=${{ inputs.GITHUB_REPOSITORY }}
+          repo_name=${full_repo_name##*/}
+          echo "REPO_NAME=$repo_name" >> $GITHUB_ENV
+          if [ "${{ inputs.force }}" == "true" ]; then
+            echo "FORCE=--force" >> $GITHUB_ENV
+          else
+            echo "FORCE=" >> $GITHUB_ENV
+          fi
+          if [ "${{ inputs.verbose }}" == "true" ]; then
+            echo "VERBOSE=--verbose" >> $GITHUB_ENV
+          else
+            echo "VERBOSE=" >> $GITHUB_ENV
+          fi
+
+      - name: ym import
+        shell: bash
+        run: |
+          docker run \
+          -v $GITHUB_WORKSPACE/${{ inputs.resources }}:/opt/docker/resources \
+          youmoni/ym-cli:${{ inputs.ym_version }} import \
+          --auth0ClientId ${{ inputs.AUTH0_CLIENT_ID }} \
+          --auth0ClientSecret '${{ inputs.AUTH0_CLIENT_SECRET }}' \
+          --dominoClientId ${{ inputs.DOMINO_CLIENT_ID }} \
+          --dominoClientSecret '${{ inputs.DOMINO_CLIENT_SECRET }}' \
+          -e ${{ inputs.environment }} \
+          --method ${{ inputs.method }} \
+          $VERBOSE \
+          $FORCE \
+          -u ${{ inputs.DOMINO_USERNAME }} \
+          -P '${{ inputs.DOMINO_PASSWORD }}' \
+          $REPO_NAME \
+          resources

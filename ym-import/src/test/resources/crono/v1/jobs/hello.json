@@ -1,0 +1,9 @@
+
+{
+  "enabled": true,
+  "code": "code/hello.js",
+  "alias": "hello",
+  "maxOps": 1500,
+  "schedule": "7 5 * * *"
+}
+
