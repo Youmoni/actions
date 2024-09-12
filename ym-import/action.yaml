@@ -75,12 +75,13 @@ runs:
           else
             echo "VERBOSE=" >> $GITHUB_ENV
           fi
+          echo "RESOURCES=$GITHUB_WORKSPACE/${{ inputs.resources }} >> $GITHUB_ENV
 
       - name: ym import
         shell: bash
         run: |
           docker run \
-          -v $GITHUB_WORKSPACE/${{ inputs.resources }}:/opt/docker/resources \
+          -v $RESOURCES:/opt/docker/resources \
           youmoni/ym-cli:${{ inputs.ym_version }} import \
           --auth0ClientId ${{ inputs.AUTH0_CLIENT_ID }} \
           --auth0ClientSecret '${{ inputs.AUTH0_CLIENT_SECRET }}' \
