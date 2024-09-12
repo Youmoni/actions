@@ -77,6 +77,7 @@ runs:
           fi
           echo "RESOURCES=$GITHUB_WORKSPACE/${{ inputs.resources }}" >> $GITHUB_ENV
           echo "resources: $(ls -R $GITHUB_WORKSPACE/${{ inputs.resources }})"
+          echo "-------------"
 
       - name: ym import
         shell: bash

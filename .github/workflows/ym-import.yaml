@@ -43,7 +43,7 @@ on:
           type: string
           default: Youmoni/ymdemo
 jobs:
-  test:
+  test-ym-import:
     runs-on: self-hosted
     steps:
       - name: Checkout repo
