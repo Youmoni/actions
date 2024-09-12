@@ -61,7 +61,7 @@ runs:
       - name: debug
         shell: bash
         run: |
-          echo "ls GITHUB_WORKSPACE: $(ls $GITHUB_WORKSPACE)"
+          echo "ls GITHUB_WORKSPACE: $(ls -R $GITHUB_WORKSPACE)"
           echo "RESOURCES=$GITHUB_WORKSPACE/${{ inputs.resources }}" >> $GITHUB_ENV
           echo "resources: $(ls -R $GITHUB_WORKSPACE/${{ inputs.resources }})"
           echo "-------------"
