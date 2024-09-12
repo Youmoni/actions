@@ -49,9 +49,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-            path: test
-      - name: run ym-import/action.yaml
-        uses: ./test
+            path: actions
+      - name: run actions/ym-import/action.yaml
+        uses: ./actions/ym-import
         with:
           method: ${{ inputs.method }}
           environment: ${{ inputs.environment }}
