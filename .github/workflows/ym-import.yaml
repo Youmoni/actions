@@ -1,4 +1,4 @@
-name: test
+name: test ym-import
 on:
   workflow_dispatch:
     inputs:
