@@ -25,7 +25,7 @@ on:
       resources:
         description: Directory of resources
         type: string
-        default: test/src/test/resources
+        default: ym-import/src/test/resources
       verbose:
         description: Be verbose
         type: boolean
