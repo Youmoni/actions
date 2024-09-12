@@ -58,14 +58,6 @@ runs:
           username: ${{ inputs.DOCKERHUB_USERNAME }}
           password: ${{ inputs.DOCKERHUB_TOKEN }}
 
-      - name: debug
-        shell: bash
-        run: |
-          echo "ls GITHUB_WORKSPACE: $(ls -R $GITHUB_WORKSPACE)"
-          echo "RESOURCES=$GITHUB_WORKSPACE/${{ inputs.resources }}" >> $GITHUB_ENV
-          echo "resources: $(ls -R $GITHUB_WORKSPACE/${{ inputs.resources }})"
-          echo "-------------"
-
       - name: Prepare arguments
         id: prepare
         shell: bash
@@ -83,6 +75,15 @@ runs:
           else
             echo "VERBOSE=" >> $GITHUB_ENV
           fi
+          echo "RESOURCES=$GITHUB_WORKSPACE/${{ inputs.resources }}" >> $GITHUB_ENV
+
+      - name: debug
+        shell: bash
+        run: |
+          echo "ls GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+          echo "resources: $(ls -R $RESOURCES)"
+          echo "-------------"
+
 
       - name: ym import
         shell: bash
