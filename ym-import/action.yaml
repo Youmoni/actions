@@ -62,9 +62,9 @@ runs:
         id: prepare
         shell: bash
         run: |
-          full_repo_name=${{ inputs.GITHUB_REPOSITORY }}
-          repo_name=${full_repo_name##*/}
-          echo "REPO_NAME=$repo_name" >> $GITHUB_ENV
+          repo=${{ inputs.GITHUB_REPOSITORY }}
+          account=${repo##*/}
+          echo "ACCOUNT=$account" >> $GITHUB_ENV
           if [ "${{ inputs.force }}" == "true" ]; then
             echo "FORCE=--force" >> $GITHUB_ENV
           else
@@ -95,11 +95,11 @@ runs:
           --auth0ClientSecret '${{ inputs.AUTH0_CLIENT_SECRET }}'
           --dominoClientId ${{ inputs.DOMINO_CLIENT_ID }}
           --dominoClientSecret '${{ inputs.DOMINO_CLIENT_SECRET }}'
-          -e ${{ inputs.environment }}
+          --env ${{ inputs.environment }}
           --method ${{ inputs.method }}
           $VERBOSE
           $FORCE
           -u ${{ inputs.DOMINO_USERNAME }}
           -P '${{ inputs.DOMINO_PASSWORD }}'
-          $REPO_NAME
+          $ACCOUNT
           resources
